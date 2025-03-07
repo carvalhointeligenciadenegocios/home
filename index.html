@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carvalho Inteligência de negócios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variáveis com a paleta de cores em tons de cinza */
+        :root {
+            --primary-color: #4f4f4f;
+            --primary-accent: #6a6a6a;
+            --secondary-color: #a6a6a6;
+            --text-light: #FFFFFF;
+            --text-gray: #c0c0c0;
+            --bg-dark: #000000;
+            --bg-dark-lighter: #1a1a1a;
+            --bg-gradient: linear-gradient(45deg, #333333, #4f4f4f, #6a6a6a, #888888);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lexend Deca', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header e Navigation */
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.95);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+			color:#ffffff;
+           
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--bg-gradient);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('/api/placeholder/1200/800') no-repeat center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--bg-gradient);
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Serviços */
+        .services {
+            padding: 6rem 0;
+            background-color: var(--bg-dark-lighter);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--bg-gradient);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--bg-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Slider */
+        .slider-section {
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .slider-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .slides {
+            position: relative;
+            width: 100%;
+        }
+        .slide {
+            width: 100%;
+            padding: 3rem;
+            background-color: var(--bg-dark-lighter);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .slide p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 8px;
+            background-color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .dot.active {
+            background: var(--primary-color);
+        }
+
+        /* Team */
+        .team {
+            padding: 6rem 0;
+            background-color: var(--bg-dark);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background-color: var(--bg-dark-lighter);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .member-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-info p {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 0;
+            background-color: var(--bg-dark-lighter);
+        }
+
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: var(--bg-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 5rem;
+            font-family: serif;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            opacity: 0.1;
+            color: var(--primary-color);
+        }
+
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .client-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        .client-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .client-details p {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            color: var(--secondary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Historia */
+        .about {
+            padding: 6rem 0;
+            background-color: var(--bg-dark);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .about-text p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-box {
+            background-color: var(--bg-dark-lighter);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .mission-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .mission-box p {
+            font-style: italic;
+        }
+
+        /* Contato */
+        .contact {
+            padding: 6rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('/api/placeholder/1200/800') no-repeat center/cover;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            background-color: var(--bg-dark-lighter);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .contact-info {
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .contact-info p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .contact-link i {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-gray);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--instagram-pink);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-dark-lighter);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--bg-gradient);
+            transform: translateY(-3px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--bg-dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1000;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .services-grid,
+            .team-grid,
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+
+            .slider-container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Animação */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Carvalho Inteligência de negócios</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#team">Equipe</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content animate">
+                <h1>Tecnologia que Transforma Resultados</h1>
+                <p class="animate delay-1">Impulsionamos negócios com soluções tecnológicas inovadoras que elevam sua eficiência, automatizam processos e potencializam seu crescimento digital..</p>
+                <a href="#contact" class="btn animate delay-2">Transforme sua marca agora!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Section -->
+<section id="services" class="services">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nossos Serviços</h2>
+            <p>Soluções tecnológicas inovadoras para otimizar e impulsionar seu negócio.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card animate">
+                <div class="service-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3>Business Intelligence</h3>
+                <p>Transformamos dados em insights estratégicos para apoiar decisões assertivas e aumentar sua competitividade.</p>
+            </div>
+            <div class="service-card animate delay-1">
+                <div class="service-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>RPA (Automação de Processos Robóticos)</h3>
+                <p>Automatizamos tarefas repetitivas, reduzindo custos operacionais e aumentando a eficiência da sua empresa.</p>
+            </div>
+            <div class="service-card animate delay-2">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Desenvolvimento de Sistemas Web & Mobile</h3>
+                <p>Criamos soluções personalizadas para atender às necessidades do seu negócio, proporcionando escalabilidade e inovação.</p>
+            </div>
+            <div class="service-card animate">
+                <div class="service-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Aplicações com Inteligência Artificial Integrada</h3>
+                <p>Utilizamos IA para otimizar processos, personalizar experiências e impulsionar resultados estratégicos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <<!-- Slider Section -->
+<section class="slider-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nossa Abordagem</h2>
+            <p>Conheça como transformamos sua empresa com tecnologia</p>
+        </div>
+        <div class="slider-container">
+            <div class="slides">
+                <div class="slide" id="slide1">
+                    <h3>O que fazemos</h3>
+                    <p>Na Carvalho, desenvolvemos soluções tecnológicas inovadoras para otimizar processos, integrar sistemas e impulsionar o crescimento do seu negócio. Utilizamos inteligência de dados, automação e desenvolvimento de software para tornar sua empresa mais eficiente e competitiva no mercado.</p>
+                    <a href="#contact" class="btn">Saiba mais</a>
+                </div>
+                <div class="slide" id="slide2">
+                    <h3>Nossos diferenciais</h3>
+                    <p>Nosso diferencial está na entrega de soluções sob medida, alinhadas às necessidades específicas de cada cliente. Trabalhamos com tecnologias de ponta, métricas transparentes e metodologias ágeis, garantindo inovação, segurança e alta performance para sua infraestrutura digital.</p>
+                    <a href="#testimonials" class="btn">Ver resultados</a>
+                </div>
+                <div class="slide" id="slide3">
+                    <h3>Como trabalhamos</h3>
+                    <p>Nosso processo inicia com um diagnóstico detalhado da sua infraestrutura e desafios tecnológicos. Desenvolvemos um plano estratégico, implementamos soluções escaláveis e realizamos monitoramento contínuo para otimizações constantes. Nossa abordagem é colaborativa e orientada para resultados.</p>
+                    <a href="#team" class="btn">Conheça nossa equipe</a>
+                </div>
+            </div>
+            <div class="slider-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Time</h2>
+                <p>Conheça os especialistas que impulsionam a inovação e desenvolvem estratégias de sucesso com tecnologia</p>
+            </div>
+            <div class="team-grid">
+               
+                <div class="team-member animate delay-1">
+                    <img src="img/saulo.jpeg" alt="Saulo Carvalho - Analista de Dados e Tráfego" class="member-img">
+                    <div class="member-info">
+                        <h3>Saulo</h3>
+                        <p>Cientista de Dados</p>
+                    </div>
+                </div>
+				
+				 <div class="team-member animate">
+                    <img src="img/jp.jpg" alt="JP - Filmmaker" class="member-img">
+                    <div class="member-info">
+                        <h3>João Pedro</h3>
+                        <p>Designer UI/UX</p>
+                    </div>
+                </div>
+				
+				<!--<div class="team-member animate delay-1">
+                    <img src="img/RENATA.jpg" alt="Renata - Story Maker & Social Media" class="member-img">
+                    <div class="member-info">
+                        <h3>Renata</h3>
+                        <p>Story Maker & Social Media</p>
+                    </div>-->
+                </div>
+                <!-- <div class="team-member animate delay-2">
+                    <img src="img/LUIZ.jpg" alt="Luiz Antônio - Videomaker" class="member-img">
+                    <div class="member-info">
+                        <h3>Luiz Antônio</h3>
+                        <p>Videomaker</p>
+                    </div>
+                </div>-->
+				
+               <!-- <div class="team-member animate delay-2">
+                    <img src="img/hamilton.jpeg" alt="Amilton - Fotógrafo" class="member-img">
+                    <div class="member-info">
+                        <h3>Hamilton</h3>
+                        <p>Fotógrafo</p>
+                    </div>-->
+                </div>
+				<!--
+                <div class="team-member animate">
+                    <img src="/api/placeholder/400/400" alt="Guilherme Dantas - Designer" class="member-img">
+                    <div class="member-info">
+                        <h3>Guilherme</h3>
+                        <p>Designer</p>
+                    </div> -->
+                </div> 
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Clientes Satisfeitos</h2>
+                <p>O que nossos clientes dizem sobre nossos serviços</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonial-card animate">
+                    <p class="testimonial-text">"A Carvalho transformou a forma como gerenciamos nossa tecnologia. Em apenas 3 meses, automatizamos processos, reduzimos custos operacionais e aumentamos nossa produtividade em 70%. A equipe é experiente, inovadora e sempre focada em soluções eficientes."</p>
+                    <div class="client-info">
+                       <!-- <img src="/api/placeholder/100/100" alt="Cliente" class="client-img">-->
+                        <div class="client-details">
+                            <h4>Alex</h4>
+                            <p>CEO, MS Alimentos</p>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+				<div class="testimonial-card animate">
+                    <p class="testimonial-text">"A Carvalho revolucionou nossa operação com soluções tecnológicas inovadoras. Em apenas 3 meses, otimizamos nossos processos, aumentamos a eficiência em 70% e aprimoramos a experiência dos nossos clientes. A equipe é altamente qualificada, estratégica e sempre atenta às nossas necessidades."</p>
+                    <div class="client-info">
+                        <!-- <img src="/api/placeholder/100/100" alt="Cliente" class="client-img">-->
+                        <div class="client-details">
+                            <h4>André Silva</h4>
+                            <p>CEO, IPA Construções</p>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				</div>
+				
+
+				</section>
+				
+				
+				
+				<!-- Seção Sobre -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-title">
+            <h2>Sobre Nós</h2>
+            <p>Conheça nossa história e missão</p>
+        </div>
+        <div class="about-content">
+            <div class="about-img animate">
+                <img src="img/equipe.png" alt="Equipe Engaje" class="about-img">
+            </div>
+            <div class="about-text animate delay-1">
+                <h2>Transformamos marcas através da tecnologia digital</h2>
+                <p>A Carvalho nasceu com a missão de criar soluções tecnológicas inovadoras para empresas que buscam otimizar seus processos e transformar suas operações. Fundada em 2018 por especialistas em tecnologia e inovação, nossa empresa se destaca pelo desenvolvimento de soluções personalizadas e pela entrega de resultados sólidos e mensuráveis.<br/>
+				Com uma equipe altamente capacitada em áreas como inteligência de dados, desenvolvimento de sistemas e automação de processos, oferecemos soluções integradas que ajudam as empresas a atingir um novo patamar de eficiência. Utilizamos as mais avançadas tecnologias para criar estratégias eficazes, sempre com foco em resultados concretos.				</p>
+                <div class="mission-box animate delay-2">
+                    <h3>Nossa Missão</h3>
+                    <p>"Impulsionar empresas por meio de soluções tecnológicas inovadoras, unindo criatividade e inteligência de dados para otimizar processos, gerar valor real e entregar resultados extraordinários."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção Contato -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="contact-container">
+            <div class="contact-info animate">
+                <h2>Entre em Contato</h2>
+                <p>Estamos prontos para transformar sua presença digital. Entre em contato conosco e agende uma consultoria gratuita para discutirmos as melhores estratégias para o seu negócio.</p>
+                <div class="contact-links">
+                    <a href="tel:+5582981231248" class="contact-link">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>(82) 9999-50016</span>
+                    </a>
+                    <a href="mailto:carvalhoInteligenciadenegocios@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>carvalhoInteligenciadenegocios@gmail.com</span>
+                    </a>
+                    <a href="#" class="contact-link">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Olho d' Água das Flores - AL</span>
+                    </a>
+                    <a href="https://www.instagram.com/carvalhointeligenciadenegocios" target="_blank" class="contact-link">
+                        <i class="fab fa-instagram"></i>
+                        <span>@Carvalho Inteligência de negócios
+</span>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="logo">Carvalho Inteligência de negócios</div>
+        <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#team">Equipe</a></li>
+            <li><a href="#testimonials">Depoimentos</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+        <div class="social-links">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/carvalhointeligenciadenegocios" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=5582999950016" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 Carvalho Inteligência de negócios. Todos os direitos reservados.</p>
+        <p>Desenvolvido por Saulo C.S Melo</p>
+    </div>
+</footer>
+
+<!-- Script para validação do formulário de contato -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validação básica
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && message) {
+                // Aqui você adicionaria o código para enviar o formulário
+                // Por exemplo, usando fetch para uma API
+                
+                // Simulação de envio bem-sucedido
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                contactForm.reset();
+            } else {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+            }
+        });
+    }
+    
+    // Adicionar animação ao scroll para as seções
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.animate');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementPosition < windowHeight - 100) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Executar uma vez ao carregar a página
+});
+</script>
+				
+				
+				
+				
+				<script>
+				
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const slidesContainer = document.querySelector('.slides');
+    
+    let currentIndex = 0;
+    
+    // Primeiro, ajustar o CSS via JavaScript para garantir que o slider funcione
+    // Isso preserva seu CSS original
+    slidesContainer.style.width = `${slides.length * 100}%`;
+    slidesContainer.style.display = 'flex';
+    slidesContainer.style.transition = 'transform 0.5s ease';
+    
+    slides.forEach(slide => {
+        slide.style.flex = `0 0 ${100 / slides.length}%`;
+    });
+    
+    // Função para mostrar um slide
+    function goToSlide(index) {
+        currentIndex = index;
+        slidesContainer.style.transform = `translateX(-${index * (100 / slides.length)}%)`;
+        
+        // Atualiza os dots
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+    }
+    
+    // Configurar dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+    });
+    
+    // Configurar slideshow automático
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        goToSlide(currentIndex);
+    }, 5000);
+    
+    // Iniciar no primeiro slide
+    goToSlide(0);
+});
+				</script>
+				
+				
+				</body>
+				</html>
+                
